@@ -129,7 +129,7 @@
                     @if (isset($allUsers))
                         @foreach ($allUsers as $users)
                             <tr>
-                                <td class="text-center py-2">{{ $users->id }}</td>
+                                <td class="text-center py-2">{{ $loop->iteration }}</td>
                                 <td class="text-center py-2">{{ $users->name }}</td>
                                 <td class="text-center py-2">{{ $users->email }}</td>
                                 <td class="text-center py-2">
@@ -137,7 +137,7 @@
                                 </td>
                                 <td class="flex justify-center items-center text-center py-2">
                                     <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-md m-1"
-                                        onclick="openEditModel(this)" data-edit-name="{{ $users->name }}" data-edit-email="{{ $users->email }}" data-edit-role="{{ $allUsersRoles->where('uuid', $users->role_id)->first()->role_name }}">Edit</button>
+                                        onclick="openEditModel(this)" data-edit-userId="{{ $users->id }}" data-edit-name="{{ $users->name }}" data-edit-email="{{ $users->email }}" data-edit-role="{{ $allUsersRoles->where('uuid', $users->role_id)->first()->role_name }}">Edit</button>
 
                                     <form method="POST" action="{{ route('userDetailsDelete', $users->id) }}">
                                         @method('DELETE')
@@ -196,6 +196,7 @@
 
         function openEditModel(a) {
             document.getElementById('viewEditModal').classList.remove('hidden');
+            const editId = a.getAttribute('data-edit-userId');
             const editName = a.getAttribute('data-edit-name');
             const editEmail = a.getAttribute('data-edit-email');
             const editRole = a.getAttribute('data-edit-role');
@@ -203,7 +204,7 @@
               <form method="POST" action="{{ route('userDetailsUpdate') }}">
                 @method('PUT')
                 @csrf
-                 <input type="hidden" name="UserId" value="{{ $users->id }}">
+                 <input type="hidden" name="UserId" value='${editId}'>
 
                 <div class="grid grid-cols-12 gap-6">
                 <!-- Name -->
@@ -225,7 +226,6 @@
                                 class="block mt-1 p-2 w-full shadow-md focus:ring-2 focus:ring-indigo-500 focus:outline-none rounded-md">
                                 <option value="" disabled>Select a Role</option>
                                 @foreach ($allUsersRoles as $roles)
-                                <option value='{{ $roles->uuid }}'' selected>${ editRole } </option>
                                 <option value='{{ $roles->uuid }}'>{{ $roles->role_name }}</option>
                                 @endforeach
                             </select>
