@@ -37,7 +37,7 @@
                         <a href="{{ route('teacher-details') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Teacher Details</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">School Name</a>
+                        <a href="{{ route('school-details') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">School Name</a>
                     </li>
                     <li>
                         <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Teacher With School Name</a>

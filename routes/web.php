@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SchoolDetailsController;
 use App\Http\Controllers\StudentDetailController;
 use App\Http\Controllers\TeacherDetailController;
 use App\Http\Controllers\UserRegisterConroller;
@@ -73,6 +74,13 @@ Route::delete('admin/user-detail/{uuid}',[UserRegisterConroller::class,'delete']
 Route::put('admin/user-detail/update',[UserRegisterConroller::class,'update'])->name('userDetailsUpdate');
 // users detail page route end
 
+// school detail page route start
+
+Route::get('admin/school-details',[SchoolDetailsController::class,'show'])->name('school-details');
+Route::post('admin/school-details/submit',[SchoolDetailsController::class,'store'])->name('schoolDetailSubmit');
+Route::delete('admin/school-details/{uuid}',[SchoolDetailsController::class,'destroy'])->name('schoolDetailDelete');
+Route::put('admin/school-details/update',[SchoolDetailsController::class,'update'])->name('schoolDetailUpdate');
+// school detail page route end
 
 
 

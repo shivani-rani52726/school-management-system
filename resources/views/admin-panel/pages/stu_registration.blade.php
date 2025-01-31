@@ -106,6 +106,10 @@
         <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
             <h2 class="text-xl font-bold text-gray-700 mb-3">Edit User Details</h2>
             <div id="viewEditContent" class="text-left"></div>   
+            <div class="text-right" style="margin-top:-40px">
+                <button id="closeViewModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    onclick="closeEditModel()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -236,10 +240,7 @@
                          <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
                              Update
                         </button>
-                         <button id="closeViewModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                           onclick="closeEditModel()">
-                              Close
-                        </button>
+                
                     </div>
 
                  
