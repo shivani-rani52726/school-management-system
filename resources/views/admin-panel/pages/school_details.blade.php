@@ -38,6 +38,7 @@
                         </thead>
                         <tbody>
                             @if (isset($allSchoolRecord))
+                            {{-- {{ $allSchoolRecord }} --}}
                                 @foreach ($allSchoolRecord as $schoolRecord)
                                     <tr>
                                         <td class="py-2">{{ $schoolRecord->school_name }}</td>
@@ -48,10 +49,11 @@
                                         <td class="py-2">{{ $schoolRecord->school_email }}</td>
                                         <td class="py-2">{{ $schoolRecord->established_year }}</td>
                                         <td class="py-2">{{ $schoolRecord->school_website }}</td>
+                                        
                                         <td class="flex justify-center items-center text-center py-2">
 
                                             <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-md m-1"
-                                                id="showEditModel" onclick="openEditModel(this)"
+                                                id="showEditModel" onclick="openEditModel(this)" data-edit-uuid="{{ $schoolRecord->uuid }}"
                                                 data-edit-schoolName="{{ $schoolRecord->school_name }}" data-edit-principalName="{{ $schoolRecord->principal_name }}" data-edit-city="{{ $schoolRecord->city_name }}" data-edit-district="{{ $schoolRecord->district_name }}" data-edit-contact="{{ $schoolRecord->contact_no }}" data-edit-email="{{ $schoolRecord->school_email }}" data-edit-established="{{ $schoolRecord->established_year }}" data-edit-website="{{ $schoolRecord->school_website }}">Edit</button>
 
                                             <form method="POST"
@@ -268,6 +270,7 @@
 
         function openEditModel(s){
             document.getElementById('viewEditModal').classList.remove('hidden');
+            const editUuid = s.getAttribute('data-edit-uuid');
             const editSchoolName = s.getAttribute('data-edit-schoolName');
             const editPrincipalName = s.getAttribute('data-edit-principalName');
             const editCity = s.getAttribute('data-edit-city');
@@ -280,7 +283,7 @@
                     <form  method="POST" action="{{ route('schoolDetailUpdate') }}">
                         @method('PUT')
                         @csrf
-                            <input type="hidden" name="schoolId" value="{{$schoolRecord->uuid}}">
+                            <input type="hidden" name="schoolId" value="${editUuid}">
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label for="schoolName" class="block text-gray-700">School Name</label>
@@ -314,11 +317,10 @@
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div>
+                             <div>
                                 <label for="contactNumber" class="block text-gray-700">School Contact Number</label>
-                                <input type="tel" id="contactNumber" name="contactNumber" maxlength="10"
-                                    minlength="10" pattern="\d{10}"
-                                    class="w-full p-2 border rounded" value="${editContact}" required>
+                                <input type="tel" class="form-control" id="mobile" name="contactNumber" required pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="${editContact}">
+                              
                                 @error('contactNumber')
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
@@ -341,7 +343,7 @@
                             </div>
                             <div>
                                 <label for="website" class="block text-gray-700">School Website</label>
-                                <input type="url" id="website" name="website" class="w-full p-2 border value="${editWebsite}" rounded">
+                                <input type="url" id="website" name="website" class="w-full p-2 border rounded" value="${editWebsite}" >
                                 @error('website')
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
