@@ -82,6 +82,14 @@ Route::delete('admin/school-details/{uuid}',[SchoolDetailsController::class,'des
 Route::put('admin/school-details/update',[SchoolDetailsController::class,'update'])->name('schoolDetailUpdate');
 // school detail page route end
 
+// teacher with school name page route start
+
+Route::get('admin/teachers',function(){
+    return view('admin-panel.pages.teachersName');
+})->name('teachers');
+
+// teacher with school name page route end
+
 
 
 

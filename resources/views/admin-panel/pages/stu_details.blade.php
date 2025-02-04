@@ -68,7 +68,15 @@
                                                     id="showDeleteModel">Delete</button>
                                             </form>
                                             <button type="buttoon" class="bg-blue-500 text-white px-4 py-2 rounded-md m-1"
-                                                 onclick="openModal(this)" data-student-name="{{ $studentRecord->stu_name }}" data-student-rollNo="{{ $studentRecord->rollNo }}" data-student-class="{{ $studentRecord->class }}" data-student-fatherName="{{ $studentRecord->father_name }}" data-student-motherName="{{ $studentRecord->mother_name }}" data-student-adharNumber="{{ $studentRecord->aadhar_number }}" data-student-address="{{ $studentRecord->address }}" data-student-contactNumber="{{ $studentRecord->contact_number }}">View</button>
+                                                onclick="openModal(this)"
+                                                data-student-name="{{ $studentRecord->stu_name }}"
+                                                data-student-rollNo="{{ $studentRecord->rollNo }}"
+                                                data-student-class="{{ $studentRecord->class }}"
+                                                data-student-fatherName="{{ $studentRecord->father_name }}"
+                                                data-student-motherName="{{ $studentRecord->mother_name }}"
+                                                data-student-adharNumber="{{ $studentRecord->aadhar_number }}"
+                                                data-student-address="{{ $studentRecord->address }}"
+                                                data-student-contactNumber="{{ $studentRecord->contact_number }}">View</button>
 
                                         </td>
                                     </tr>
@@ -91,7 +99,7 @@
                             onclick="closeModel()">Close</button>
                     </div>
                 </div>
-                
+
             </div>
 
             <!-- Modals -->
@@ -99,6 +107,12 @@
             <div id="formModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+
+                    <!-- Close Button (Top Right Corner of Form) -->
+                    <button id="closeForm"
+                        class="absolute top-0 right-0 p-0 -mt-2  text-gray-700 text-3xl font-bold hover:text-red-600">
+                        &times;
+                    </button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">Add Student Details</h2>
                     <form id="studentForm" method="POST" action="{{ route('studentDetailSubmit') }}">
                         @csrf
@@ -122,14 +136,14 @@
                             <div>
                                 <label for="fatherName" class="block text-sm font-medium text-gray-700">Father's
                                     Name</label>
-                                <input type="text" id="fatherName" name="fatherName" class="p-2 border rounded w-full"
-                                    placeholder="Enter father's name" required>
+                                <input type="text" id="fatherName" name="fatherName"
+                                    class="p-2 border rounded w-full" placeholder="Enter father's name" required>
                             </div>
                             <div>
                                 <label for="motherName" class="block text-sm font-medium text-gray-700">Mother's
                                     Name</label>
-                                <input type="text" id="motherName" name="motherName" class="p-2 border rounded w-full"
-                                    placeholder="Enter mother's name" required>
+                                <input type="text" id="motherName" name="motherName"
+                                    class="p-2 border rounded w-full" placeholder="Enter mother's name" required>
                             </div>
                             <div>
                                 <label for="aadhaarNo" class="block text-sm font-medium text-gray-700">Aadhaar
@@ -190,7 +204,7 @@
         });
 
 
-        
+
         function openModal(s) {
             document.getElementById('viewModal').classList.remove('hidden');
             const viewStudentName = s.getAttribute('data-student-name');
@@ -241,5 +255,10 @@
         function closeModel() {
             document.getElementById('viewModal').classList.add('hidden');
         }
+
+        // Close the form modal (X button)
+        document.getElementById('closeForm').addEventListener('click', function() {
+            document.getElementById('formModal').classList.add('hidden');
+        });
     </script>
 @endsection

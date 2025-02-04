@@ -40,17 +40,18 @@
                         <a href="{{ route('school-details') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">School Name</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Teacher With School Name</a>
+                        <a href="{{ route('teachers') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Teacher With School Name</a>
                     </li>
-                    {{-- <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Manage Students</a>
-                    </li> --}}
-                    {{-- <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Courses</a>
-                    </li> --}}
-                    {{-- <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Reports</a>
-                    </li> --}}
+                   
+                    <li>
+                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Class</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Subject With Class</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Study Material</a>
+                    </li>
                     {{-- <li>
                         <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Settings</a>
                     </li> --}}
