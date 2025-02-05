@@ -90,6 +90,8 @@
     <div id="viewModal"
         class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
         <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+            <button  class="absolute top-0 right-0 -mt-3 -mr-4 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+            onclick="closeModel()">X</button>
             <h2 class="text-xl font-bold text-gray-700 mb-3">View User Details</h2>
             <div id="viewContent" class="text-left"></div>
 
@@ -104,6 +106,8 @@
     <div id="viewEditModal"
         class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
         <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+            <button  class="absolute top-0 right-0 -mt-3 -mr-4 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+            onclick="closeEditModel()">X</button>
             <h2 class="text-xl font-bold text-gray-700 mb-3">Edit User Details</h2>
             <div id="viewEditContent" class="text-left"></div>   
             <div class="text-right" style="margin-top:-40px">

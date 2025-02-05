@@ -14,7 +14,8 @@
 
             <!-- Role Form Modal -->
             <div id="roleFormModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
-                <div class="bg-white p-6 rounded-md w-1/3">
+                <div class="bg-white p-6 rounded-md w-1/3 relative">
+                    <button id="closeFormsym" class="absolute top-0 right-0 -mt-3 -mr-4 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold">X</button>
                     <h2 class="text-xl font-semibold mb-4">Add Role</h2>
                     <form id="roleForm" method="POST" action="{{ route('roleSubmit') }}">
                         @csrf
@@ -106,6 +107,9 @@
 
         // Close form modal
         closeFormBtn.addEventListener('click', () => {
+            roleFormModal.classList.add('hidden');
+        });
+        closeFormsym.addEventListener('click', () => {
             roleFormModal.classList.add('hidden');
         });
 

@@ -93,11 +93,13 @@
             <div id="viewModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+                    <button  class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+                            onclick="closeModel()">X</button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">View School Details</h2>
                     <div id="viewContent" class="text-left"></div>
 
                     <div class="text-center mt-4">
-                        <button id="closeViewModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        <button  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                             onclick="closeModel()">Close</button>
                     </div>
                 </div>
@@ -108,10 +110,12 @@
             <div id="viewEditModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+                    <button  class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+                    onclick="closeEditModel()">X</button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">Edit School Details</h2>
                     <div id="viewEditContent" class="text-left"></div>
                     <div class="text-right" style="margin-top:-40px">
-                        <button id="closeViewModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        <button  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                             onclick="closeEditModel()">Close</button>
                     </div>
                 </div>
@@ -120,7 +124,9 @@
 
             <!-- Form Modal -->
             <div id="formModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-                <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+                <div class="bg-white p-6 rounded shadow-lg w-full max-w-md relative">
+                    <button type="button" id="closeModalSym"
+                    class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold">X</button>
                     <h2 class="text-xl font-bold mb-4">Add School Details</h2>
                     <form id="schoolForm" method="POST" action="{{ route('schoolDetailSubmit') }}">
                         @csrf
@@ -213,6 +219,9 @@
         });
 
         closeModal.addEventListener('click', () => {
+            formModal.classList.add('hidden');
+        }); 
+         closeModalSym.addEventListener('click', () => {
             formModal.classList.add('hidden');
         });
 

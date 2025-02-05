@@ -69,7 +69,13 @@
                                             </form>
                                             <button type="buttoon" class="bg-blue-500 text-white px-4 py-2 rounded-md m-1"
                                                 id="showViewModel" onclick="openModal(this)"
-                                                data-teacher-name="{{ $teacherRecord->teacher_name }}" data-teacher-SchoolName="{{ $teacherRecord->teacher_school_name }}" data-teacher-class="{{ $teacherRecord->teacher_class }}" data-teacher-subject="{{ $teacherRecord->teacher_subject }}" data-teacher-aadharNo="{{ $teacherRecord->aadhar_no }}" data-teacher-contactNo="{{ $teacherRecord->contact_no }}" data-teacher-address="{{ $teacherRecord->address }}">View</button>
+                                                data-teacher-name="{{ $teacherRecord->teacher_name }}"
+                                                data-teacher-SchoolName="{{ $teacherRecord->teacher_school_name }}"
+                                                data-teacher-class="{{ $teacherRecord->teacher_class }}"
+                                                data-teacher-subject="{{ $teacherRecord->teacher_subject }}"
+                                                data-teacher-aadharNo="{{ $teacherRecord->aadhar_no }}"
+                                                data-teacher-contactNo="{{ $teacherRecord->contact_no }}"
+                                                data-teacher-address="{{ $teacherRecord->address }}">View</button>
 
                                         </td>
                                     </tr>
@@ -84,15 +90,17 @@
             <div id="viewModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+                    <button  class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+                            onclick="closeModel()">X</button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">View Teacher Details</h2>
                     <div id="viewContent" class="text-left"></div>
 
                     <div class="text-center mt-4">
-                        <button id="closeViewModal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                             onclick="closeModel()">Close</button>
                     </div>
                 </div>
-                
+
             </div>
 
             <!-- Modals -->
@@ -100,6 +108,10 @@
             <div id="formModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+                    <button type="button" id="closeModalSym"
+                        class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold">
+                        X
+                    </button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">Add Teacher Details</h2>
                     <form id="teacherForm" method="POST" action="{{ route('teacherDetailSubmit') }}">
                         @csrf
@@ -186,6 +198,10 @@
         });
 
         closeModal.addEventListener('click', () => {
+            formModal.classList.add('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+        closeModalSym.addEventListener('click', () => {
             formModal.classList.add('hidden');
             document.body.classList.add('overflow-hidden');
         });

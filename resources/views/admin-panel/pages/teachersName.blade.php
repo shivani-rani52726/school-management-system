@@ -53,8 +53,15 @@
                     <form id="teacherForm">
                         <div class="mb-4">
                             <label for="schoolName" class="block text-gray-700">School Name</label>
-                            <input type="text" id="schoolName" name="schoolName" class="w-full p-2 border rounded"
-                                required>
+                            {{-- {{ $schoolDetail }} --}}
+                            
+                            @if (isset($schoolDetail))
+                            <select>
+                            @foreach ($schoolDetail as $schoolName)
+                                    <option value="{{ $schoolName->uuid }}">{{ $schoolName->school_name }}</option>
+                            @endforeach
+                        </select>
+                        @endif
                         </div>
 
                         <!-- Teacher Inputs -->

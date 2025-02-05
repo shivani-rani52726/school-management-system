@@ -12,12 +12,14 @@
 
 
             {{-- edit form model  --}}
-            <div>
-                <div class="bg-white p-6 rounded shadow-lg">
+            <div class="bg-gray-100 px-4 py-3 rounded-t shadow-md">
+                <div class="bg-white p-6 rounded shadow-lg shadow-t relative">
                     <form method="POST" action="{{ route('roleUpdate') }}">
                         @method('PUT')
                         @csrf
                         <input type="hidden" name="roleId" value="{{ $editRole->uuid }}">
+                        <a href="{{ route('roles') }}" type="button" 
+                        class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold">X</a>
                         <h2 class="text-xl font-semibold mb-4">Edit Role</h2>
                         <label for="roleName" class="block font-medium">Role Name:</label>
                         <input type="text" id="roleName" name="roleName" value="{{ $editRole->role_name }}"

@@ -91,6 +91,8 @@
             <div id="viewModal"
                 class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden">
                 <div class="bg-white rounded shadow-lg w-full max-w-lg p-5 relative">
+                    <button id="closeViewModal" class="absolute top-0 right-0 -mt-2 -mr-3 text-red px-4 py-2 rounded hover:text-red-500 text-xl font-bold"
+                    onclick="closeModel()">X</button>
                     <h2 class="text-xl font-bold text-gray-700 mb-3">View Student Details</h2>
                     <div id="viewContent" class="text-left"></div>
 

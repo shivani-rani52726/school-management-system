@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\schoolDetails;
+use App\Models\TeacherDetail;
 use App\Models\teachersName;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,10 @@ class TeachersNameController extends Controller
      */
     public function index()
     {
-        //
+
+        $teacherDetail = TeacherDetail::all();
+        $schoolDetail = schoolDetails::all();
+        return view('admin-panel.pages.teachersName',compact('teacherDetail', 'schoolDetail'));
     }
 
     /**

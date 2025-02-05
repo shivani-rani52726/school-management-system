@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolDetailsController;
 use App\Http\Controllers\StudentDetailController;
 use App\Http\Controllers\TeacherDetailController;
+use App\Http\Controllers\TeachersNameController;
 use App\Http\Controllers\UserRegisterConroller;
 use Illuminate\Support\Facades\Route;
 
@@ -84,11 +85,15 @@ Route::put('admin/school-details/update',[SchoolDetailsController::class,'update
 
 // teacher with school name page route start
 
-Route::get('admin/teachers',function(){
-    return view('admin-panel.pages.teachersName');
-})->name('teachers');
+// Route::get('admin/teachers',function(){
+//     return view('admin-panel.pages.teachersName');
+// })->name('teachers');
+
+Route::get('admin/teachers',[TeachersNameController::class,'index'])->name('teachers');
 
 // teacher with school name page route end
+
+
 
 
 
