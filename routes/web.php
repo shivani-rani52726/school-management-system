@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClassStudentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolDetailsController;
 use App\Http\Controllers\StudentDetailController;
+use App\Http\Controllers\SubjectWithClassController;
 use App\Http\Controllers\TeacherDetailController;
 use App\Http\Controllers\TeachersNameController;
 use App\Http\Controllers\UserRegisterConroller;
@@ -32,9 +34,6 @@ require __DIR__.'/auth.php';
 Route::get('/admin',function(){
     return view('admin-panel.dashboard');
 })->name('admin-dashboard');
-// Route::get('/admin/registration',function(){
-//     return view('admin-panel.pages.stu_registration');
-// })->name('registeration');
 
 Route::get('admin/registration',[UserRegisterConroller::class,'showUsers'])->name('registeration');
 Route::post('admin/registration',[UserRegisterConroller::class,'store'])->name('storeUser');
@@ -85,16 +84,30 @@ Route::put('admin/school-details/update',[SchoolDetailsController::class,'update
 
 // teacher with school name page route start
 
-// Route::get('admin/teachers',function(){
-//     return view('admin-panel.pages.teachersName');
-// })->name('teachers');
-
 Route::get('admin/teachers',[TeachersNameController::class,'index'])->name('teachers');
+Route::post('admin/teachers/submit',[TeachersNameController::class,'store'])->name('teacherWithSchoolNameSubmit');
+Route::delete('admin/teachers/{uuid}',[TeachersNameController::class,'destroy'])->name('teacherWithSchoolNameDelete');
+Route::put('admin/teachers/update',[TeachersNameController::class,'update'])->name('teacherWithSchoolNameUpdate');
 
 // teacher with school name page route end
 
+// class page route start
+
+Route::get('admin-panel/class',[ClassStudentController::class,'show'])->name('class');
+Route::post('admin/class',[ClassStudentController::class,'store'])->name('studentClassSubmit');
+Route::delete('admin/class/{uuid}',[ClassStudentController::class,'destroy'])->name('classNameDelete');
+Route::put('admin/class/update',[ClassStudentController::class,'update'])->name('classNameUpdate');
+
+// class page route end
+// subject with class page route start
+
+Route::get('admin/subjects',[SubjectWithClassController::class,'index'])->name('subjects');
+Route::post('admin/subjects/submit',[SubjectWithClassController::class,'store'])->name('subjectWithClassSubmit');
+Route::delete('admin/subjects/{uuid}',[SubjectWithClassController::class,'destroy'])->name('subjectWithClassDelete');
+Route::put('admin/subjects/update',[SubjectWithClassController::class,'update'])->name('subjectWithClassUpdate');
 
 
+// subject with class page route end
 
 
 

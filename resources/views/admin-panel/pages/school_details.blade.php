@@ -64,7 +64,7 @@
                                                     class="bg-red-500 text-white px-4 py-2 rounded-md m-1"
                                                     id="showDeleteModel">Delete</button>
                                             </form>
-                                            <button type="buttoon" class="bg-blue-500 text-white px-4 py-2 rounded-md m-1"
+                                            <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md m-1"
                                                 onclick="openModal(this)"
                                                 data-school-name="{{ $schoolRecord->school_name }}"
                                                 data-principal-name="{{ $schoolRecord->principal_name }}"

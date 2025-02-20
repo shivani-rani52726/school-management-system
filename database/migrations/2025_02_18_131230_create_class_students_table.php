@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers_names', function (Blueprint $table) {
+        Schema::create('class_students', function (Blueprint $table) {
             $table->uuid()->primary()->unique();
-            $table->uuid('school_name')->nullable();
-            $table->foreign('school_name')->references('uuid')->on('school_details')->onDelete('cascade');
-            $table->uuid('teacher_name')->nullable();
-            $table->foreign('teacher_name')->references('uuid')->on('teacher_details')->onDelete('cascade');
+            $table->string('class');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers_names');
+        Schema::dropIfExists('class_students');
     }
 };

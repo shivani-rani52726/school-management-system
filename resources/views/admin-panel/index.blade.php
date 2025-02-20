@@ -44,10 +44,10 @@
                     </li>
                    
                     <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Class</a>
+                        <a href="{{ route('class') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Class</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Subject With Class</a>
+                        <a href="{{ route('subjects') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Subject With Class</a>
                     </li>
                     <li>
                         <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Study Material</a>
