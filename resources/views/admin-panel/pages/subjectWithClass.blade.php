@@ -44,7 +44,10 @@
                                         <td class="flex justify-center items-center text-center py-2">
 
                                             <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-md m-1"
-                                                id="showEditModel" onclick="openEditModel(this)" data-edit-uuid="{{ $class->uuid }}" data-edit-className="{{ $class->className->class }}" data-edit-subjectName="{{ $class->subject_name }}">Edit</button>
+                                                id="showEditModel" onclick="openEditModel(this)"
+                                                data-edit-uuid="{{ $class->uuid }}"
+                                                data-edit-className="{{ $class->className->class }}"
+                                                data-edit-subjectName="{{ $class->subject_name }}">Edit</button>
 
                                             <form method="POST"
                                                 action="{{ route('subjectWithClassDelete', $class->uuid) }}">
@@ -109,19 +112,22 @@
                             @endif
                         </div>
 
-                        <!-- Subject Name Input -->
-                        <div class="mb-4">
-                            <label for="subjectName" class="block text-gray-700">Subject Name</label>
-                            <input type="text" id="subjectName" name="subjectName" class="w-full p-2 border rounded"
-                                required>
+
+                        <!-- Dynamic Subject Fields -->
+                        <div id="subjectFields">
+                            <div class="mb-4 flex items-center">
+                                <input type="text" name="subjectName[]" class="w-full p-2 border rounded" required
+                                    placeholder="Enter Subject Name">
+                                <button type="button"
+                                    class="ml-2 text-red-500 text-2xl removeSubject hidden">&times;</button>
+                            </div>
                         </div>
 
                         <!-- Add More Button -->
                         <button type="button" id="addMore"
-                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                            Add More
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mb-4">
+                            + Add More
                         </button>
-
 
                         <div class="flex justify-end gap-2">
                             <button type="button" id="closeModal"
@@ -146,6 +152,8 @@
                     const closeForm = document.getElementById("closeForm");
                     const closeModal = document.getElementById("closeModal");
                     const subjectForm = document.getElementById("subjectForm");
+                    const addMoreBtn = document.getElementById("addMore");
+                    const subjectFields = document.getElementById("subjectFields");
                     const subjectTable = document.getElementById("subjectTable").querySelector("tbody");
 
                     let count = 0;
@@ -165,8 +173,36 @@
                         formModal.classList.add("hidden");
                     });
 
+               
+                // Add More Input Field (Fix)
+                addMoreBtn.addEventListener("click", function() {
+                    const newField = document.createElement("div");
+                    newField.classList.add("mb-4", "flex", "items-center");
+                    newField.innerHTML = `
+            <input type="text" name="subjectName[]" class="w-full p-2 border rounded" required placeholder="Enter Subject Name">
+            <button type="button" class="ml-2 text-red-500 text-2xl removeSubject">&times;</button>
+        `;
+                    subjectFields.appendChild(newField);
+
+                    updateRemoveButtons();
                 });
 
+                // Remove Subject Field
+                subjectFields.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("removeSubject")) {
+                        event.target.parentElement.remove();
+                        updateRemoveButtons();
+                    }
+                });
+
+                // Show Delete Button Only if More than One Field Exists
+                function updateRemoveButtons() {
+                    const removeButtons = document.querySelectorAll(".removeSubject");
+                    removeButtons.forEach((btn, index) => {
+                        btn.style.display = removeButtons.length > 1 ? "block" : "none";
+                    });
+                }
+            });
                 function openEditModel(s) {
                     document.getElementById('viewEditModal').classList.remove('hidden');
                     const editId = s.getAttribute('data-edit-uuid');
@@ -174,7 +210,7 @@
                     const editSubjectName = s.getAttribute('data-edit-subjectName');
                     document.querySelector('#viewEditContent').innerHTML = `
                    <form method="POST" action="{{ route('subjectWithClassUpdate') }}">
-                         @method('PUT')
+                         @extends('admin-panel.index')
                         @csrf
                             <input type="hidden" name="subjectId" value="${editId}">
                         <!-- Select Class -->

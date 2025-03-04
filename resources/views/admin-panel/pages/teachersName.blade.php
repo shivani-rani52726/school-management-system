@@ -130,12 +130,6 @@
                             </div>
                         </div>
 
-                        {{-- <!-- Add More Button -->
-                        <button type="button" id="addMore"
-                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                            Add More
-                        </button> --}}
-
                         <!-- Form Buttons -->
                         <div class="flex justify-end gap-2 mt-4">
                             <button type="button" id="closeModal"
@@ -191,42 +185,6 @@
             });
 
 
-
-            // Add More Teacher Fields
-            // addMoreBtn.addEventListener('click', () => {
-            //     const div = document.createElement('div');
-            //     div.classList.add("flex", "items-center", "gap-2", "mb-2");
-            //     div.innerHTML = `
-        //                      @if (isset($teacherDetail))
-        //                         <select
-        //                             class="block mt-1 p-2 w-full shadow-md focus:ring-2 focus:ring-indigo-500 focus:outline-none rounded-md">
-        //                             <option value="" disabled selected>Select a Teacher Name</option>
-        //                             @foreach ($teacherDetail as $teacherName)
-        //                                 <option value="{{ $teacherName->uuid }}">{{ $teacherName->teacher_name }}
-        //                                 </option>
-        //                             @endforeach
-        //                         </select>
-        //                     @endif
-        //     <button type="button" class="deleteInput bg-red-500 text-white px-2 py-1 rounded">✖</button>
-        // `;
-            //     teacherInputs.appendChild(div);
-            // });
-
-            // Delete Individual Input Field
-            // teacherInputs.addEventListener('click', (e) => {
-            //     if (e.target.classList.contains('deleteInput')) {
-            //         e.target.parentElement.remove();
-            //     }
-            // });
-
-
-
-            // Delete Row from Table
-            // teacherTable.addEventListener('click', (e) => {
-            //     if (e.target.classList.contains('deleteRow')) {
-            //         e.target.closest('tr').remove();
-            //     }
-            // });
         });
 
         function openEditModel(s) {
