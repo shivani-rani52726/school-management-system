@@ -116,7 +116,7 @@
                         <!-- Dynamic Subject Fields -->
                         <div id="subjectFields">
                             <div class="mb-4 flex items-center">
-                                <input type="text" name="subjectName[]" class="w-full p-2 border rounded" required
+                                <input type="text" name="subjectName" class="w-full p-2 border rounded" required
                                     placeholder="Enter Subject Name">
                                 <button type="button"
                                     class="ml-2 text-red-500 text-2xl removeSubject hidden">&times;</button>
@@ -172,9 +172,7 @@
                     closeModal.addEventListener("click", function() {
                         formModal.classList.add("hidden");
                     });
-
-               
-                // Add More Input Field (Fix)
+                     // Add More Input Field (Fix)
                 addMoreBtn.addEventListener("click", function() {
                     const newField = document.createElement("div");
                     newField.classList.add("mb-4", "flex", "items-center");
@@ -186,6 +184,9 @@
 
                     updateRemoveButtons();
                 });
+
+               
+              
 
                 // Remove Subject Field
                 subjectFields.addEventListener("click", function(event) {
@@ -203,16 +204,17 @@
                     });
                 }
             });
-                function openEditModel(s) {
+            
+            function openEditModel(s) {
                     document.getElementById('viewEditModal').classList.remove('hidden');
                     const editId = s.getAttribute('data-edit-uuid');
                     const editClassName = s.getAttribute('data-edit-className');
                     const editSubjectName = s.getAttribute('data-edit-subjectName');
                     document.querySelector('#viewEditContent').innerHTML = `
                    <form method="POST" action="{{ route('subjectWithClassUpdate') }}">
-                         @extends('admin-panel.index')
+                        @method('PUT')
                         @csrf
-                            <input type="hidden" name="subjectId" value="${editId}">
+                            <input type="hidden" name="subjectWithClassId" value="${editId}">
                         <!-- Select Class -->
                         <div class="mb-4">
                             <label for="className" class="block text-gray-700">Select Class</label>
@@ -245,7 +247,7 @@
                     </form>
                 `;
                 }
-
+                
                 function closeEditModel() {
                     document.getElementById('viewEditModal').classList.add('hidden');
                 }

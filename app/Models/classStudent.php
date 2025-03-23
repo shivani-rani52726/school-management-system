@@ -12,6 +12,6 @@ class classStudent extends Model
     protected $fillable = ['class'];
 
     public function className(){
-        return $this->hasMany(classStudent::class, 'class');
+        return $this->hasMany(subjectWithClass::class, 'class');
     }
 }

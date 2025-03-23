@@ -8,6 +8,14 @@ use App\Http\Controllers\StudentDetailController;
 use App\Http\Controllers\SubjectWithClassController;
 use App\Http\Controllers\TeacherDetailController;
 use App\Http\Controllers\TeachersNameController;
+use App\Http\Controllers\StudyMaterialController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\FeeController;
+use App\Http\Controllers\StudentStudyMaterialController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\UserRegisterConroller;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +116,97 @@ Route::put('admin/subjects/update',[SubjectWithClassController::class,'update'])
 
 
 // subject with class page route end
+
+// study material route start
+
+// Route::get('admin/study-material',function(){
+//     return view('admin-panel.pages.studyMaterial');
+// })->name('studyMaterials');
+
+
+
+
+Route::get('/study-materials', [StudyMaterialController::class, 'index'])->name('studyMaterial.index');
+Route::get('/study-materials/create', [StudyMaterialController::class, 'create'])->name('studyMaterial.create');
+Route::post('/study-materials', [StudyMaterialController::class, 'store'])->name('studyMaterial.store');
+Route::get('/study-materials/download/{id}', [StudyMaterialController::class, 'download'])->name('studyMaterial.download');
+Route::delete('/study-materials/{id}', [StudyMaterialController::class, 'destroy'])->name('studyMaterial.destroy');
+
+
+
+
+
+
+// study material route end
+
+// student dashboard route start
+
+// study material routes start
+Route::get('/student-dashboard/study-materials', [StudentController::class, 'studyMaterials'])->name('study.materials');
+Route::get('/student-dashboard/create-notes', [StudentController::class, 'createNotes'])->name('notes.create');
+Route::post('/student-dashboard/save-notes', [StudentController::class, 'saveNotes'])->name('notes.save');
+Route::get('/student-dashboard/my-notes', [StudentController::class, 'myNotes'])->name('notes.myNotes');
+// Route::get('/student/study-materials', [StudentController::class, 'studentStudyMaterials'])->name('student.studyMaterial');
+
+
+Route::get('/student/study-materials', [StudentStudyMaterialController::class, 'index'])->name('student.studyMaterials');
+
+
+// study material route end
+// view notes route
+
+
+Route::delete('student-dashboard/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
+
+
+// start preparing card route start
+
+
+
+Route::get('/student-dashboard/quiz', [QuizController::class, 'index'])->name('quiz.index');
+Route::get('/student-dashboard/quiz/create', [QuizController::class, 'create'])->name('quiz.create');
+Route::post('/student-dashboard/quiz', [QuizController::class, 'store'])->name('quiz.store');
+Route::post('/student-dashboard/quiz/evaluate', [QuizController::class, 'evaluate'])->name('quiz.evaluate');
+Route::delete('/student-dashboard/quiz/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+
+
+// start preparing card route end
+
+// view attendence page route start
+
+
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.view');
+Route::get('/attendance/add', [AttendanceController::class, 'create'])->name('attendance.create');
+Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
+
+
+// view attendence page route end
+
+// view result page route start
+
+
+Route::get('/results', [ResultController::class, 'index'])->name('results.index');
+Route::post('/results', [ResultController::class, 'store'])->name('results.store');
+Route::delete('/results/{id}', [ResultController::class, 'destroy'])->name('results.destroy');
+
+
+// view result page route end
+
+// view fees page route start
+
+
+
+Route::get('/fees', [FeeController::class, 'index'])->name('fees.index');
+Route::get('/fees/create', [FeeController::class, 'create'])->name('fees.create');
+Route::post('/fees/store', [FeeController::class, 'store'])->name('fees.store');
+
+
+// view fees page route end
+
+
+
+
+// student dashboard route end
 
 
 

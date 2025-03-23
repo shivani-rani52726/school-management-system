@@ -5,57 +5,71 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{-- {{ __("You're logged in!") }} --}}
-                    <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style="transition: transform 0.3s ease, box-shadow 0.3s ease;" 
-                        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 15px rgba(0, 0, 0, 0.2)';" 
-                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
-                            <div class="card-body">
-                                <div class="card-title text-center">
-                                    <a href="http://" class="text-decoration-none text-dark">Notes</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+   
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold mb-6 text-center">Student Dashboard</h2>
 
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title text-center">
-                                    <a href="http://" class="text-decoration-none text-dark">Pdf</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title text-center">
-                                    <a href="http://" class="text-decoration-none text-dark">Questions</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title text-center">
-                                    <a href="http://" class="text-decoration-none text-dark">Quiz's</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Study Material -->
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📚 Study Materials</h3>
+            <p>Download your study materials and notes.</p>
+            <a href="{{ route('student.studyMaterials') }}" class="text-decoration-none block bg-blue-500 text-white text-center py-2 rounded mt-3 hover:bg-blue-600">
+                View Materials
+            </a>
+            
+            
         </div>
+
+        <!-- Notes Section -->
+        {{-- <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📝 My Notes</h3>
+            <p>Write, save and download your notes as PDF.</p>
+            <a href="{{ route('notes.create') }}" class="block bg-green-500 text-white text-center py-2 rounded mt-3 hover:bg-green-600">
+                Create Notes
+            </a>
+            
+        </div> --}}
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📝 My Notes</h3>
+            <p>Write, save, and view your notes anytime.</p>
+            <a href="{{ route('notes.myNotes') }}" class="text-decoration-none block bg-green-500 text-white text-center py-2 rounded mt-3 hover:bg-green-600">
+                View Notes
+            </a>
+        </div>
+
+        <!-- Exam Preparation -->
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📖 Exam Preparation</h3>
+            <p>Practice important questions and quizzes.</p>
+            <a href="{{ route('quiz.index') }}" class="text-decoration-none block bg-purple-500 text-white text-center py-2 rounded mt-3 hover:bg-purple-600">Start Preparing</a>
+        </div>
+
+        <!-- Attendance -->
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📅 Attendance</h3>
+            <p>Check your attendance records.</p>
+            <a href="{{ route('attendance.view') }}" class="text-decoration-none block bg-yellow-500 text-white text-center py-2 rounded mt-3 hover:bg-yellow-600">View Attendance</a>
+        </div>
+
+        <!-- Results -->
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">📊 My Results</h3>
+            <p>View your exam scores and grades.</p>
+            <a href="{{ route('results.index') }}" class="text-decoration-none block bg-red-500 text-white text-center py-2 rounded mt-3 hover:bg-red-600">Check Results</a>
+        </div>
+
+        <!-- Fees -->
+        <div class="bg-white shadow-lg p-4 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">💰 Fee Status</h3>
+            <p>Check your fee payments and due dates.</p>
+            <a href="{{ route('fees.index') }}" class="text-decoration-none block bg-indigo-500 text-white text-center py-2 rounded mt-3 hover:bg-indigo-600">View Fees</a>
+        </div>
+
+        
+        
     </div>
+</div>
+
+
 </x-app-layout>

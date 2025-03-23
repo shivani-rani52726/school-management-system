@@ -27,6 +27,7 @@ class SubjectWithClassController extends Controller
          ]);
 
          $classStudent = new subjectWithClass();
+        //  dd($classStudent);
          $classStudent->class = $request->classId;
          $classStudent->subject_name =$request->subjectName;
          $classStudent->save();
@@ -47,7 +48,7 @@ class SubjectWithClassController extends Controller
      */
     public function update(Request $request)
     {
-        $subjectWithClass = subjectWithClass::findOrFail($request->subjectId);
+        $subjectWithClass = subjectWithClass::findOrFail($request->subjectWithClassId);
         $subjectWithClass->class = $request->classId;
         $subjectWithClass->subject_name = $request->subjectName;
         $subjectWithClass->update(); 

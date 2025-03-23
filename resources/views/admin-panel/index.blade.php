@@ -50,7 +50,7 @@
                         <a href="{{ route('subjects') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Subject With Class</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Study Material</a>
+                        <a href="{{ route('studyMaterial.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Study Material</a>
                     </li>
                     {{-- <li>
                         <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Settings</a>
