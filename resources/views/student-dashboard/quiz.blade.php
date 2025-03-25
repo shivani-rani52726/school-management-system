@@ -10,7 +10,14 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($questions as $question)
-                    <div class="bg-white shadow-lg p-4 rounded-lg">
+                    <div class="bg-white shadow-lg p-4 rounded-lg relative" id="quiz-card-{{ $question->id }}">
+                        
+                        <!-- ❌ Delete Button (Calls Backend) -->
+                        <button type="button" onclick="deleteQuestion({{ $question->id }})"
+                            class="absolute top-2 right-2 text-red-500 hover:text-red-700">
+                            ❌
+                        </button>
+
                         <h3 class="text-lg font-semibold">{{ $question->question }}</h3>
 
                         <label><input type="radio" name="answer_{{ $question->id }}" value="option_a"> {{ $question->option_a }}</label><br>
@@ -25,4 +32,35 @@
             <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded">Submit Quiz</button>
         </div>
     </form>
+
+    <!-- 🛠️ JavaScript to Delete Question via AJAX -->
+    <script>
+        function deleteQuestion(questionId) {
+            if (!confirm("Are you sure you want to delete this question?")) {
+                return;
+            }
+
+            fetch(`/quiz/${questionId}/delete`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let card = document.getElementById('quiz-card-' + questionId);
+                    if (card) {
+                        card.style.transition = "opacity 0.3s ease-out";
+                        card.style.opacity = "0";
+                        setTimeout(() => card.remove(), 300);
+                    }
+                } else {
+                    alert("Error deleting question!");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </x-app-layout>

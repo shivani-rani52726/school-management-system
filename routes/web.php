@@ -167,7 +167,10 @@ Route::get('/student-dashboard/quiz', [QuizController::class, 'index'])->name('q
 Route::get('/student-dashboard/quiz/create', [QuizController::class, 'create'])->name('quiz.create');
 Route::post('/student-dashboard/quiz', [QuizController::class, 'store'])->name('quiz.store');
 Route::post('/student-dashboard/quiz/evaluate', [QuizController::class, 'evaluate'])->name('quiz.evaluate');
-Route::delete('/student-dashboard/quiz/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+// Route::delete('/student-dashboard/quiz/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+
+Route::delete('/quiz/{id}/delete', [QuizController::class, 'destroy'])->name('quiz.delete');
+
 
 
 // start preparing card route end

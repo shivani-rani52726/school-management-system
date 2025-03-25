@@ -17,18 +17,23 @@
         <h2 class="text-2xl font-bold mt-6">Your Answers:</h2>
         <div class="mt-4">
             @foreach($results as $result)
-                <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                <div class="bg-gray-100 p-4 rounded-lg mb-4 relative">
                     <h3 class="font-semibold">{{ $result['question'] }}</h3>
 
                     <p class="mt-2">
-                        ✅ Correct Answer: 
-                        <strong class="text-green-600">{{ $result['correct_answer'] }}</strong>
+                        ✅ <strong class="text-green-600">Correct Answer:</strong> {{ $result['correct_answer'] }}
                     </p>
 
                     @if ($result['is_correct'])
-                        <p class="mt-1 text-green-500 font-bold">✔️ Your Answer: {{ $result['user_answer'] }} (Correct!)</p>
+                        <p class="mt-1 text-green-500 font-bold">
+                            ✔️ Your Answer: {{ $result['user_answer'] }} (Correct!)  
+                            <span class="text-blue-600">(+1 Mark)</span>
+                        </p>
                     @else
-                        <p class="mt-1 text-red-500 font-bold">❌ Your Answer: {{ $result['user_answer'] }} (Wrong!)</p>
+                        <p class="mt-1 text-red-500 font-bold">
+                            ❌ Your Answer: {{ $result['user_answer'] }} (Wrong!)  
+                            <span class="text-red-600">(-0 Mark)</span>
+                        </p>
                     @endif
                 </div>
             @endforeach

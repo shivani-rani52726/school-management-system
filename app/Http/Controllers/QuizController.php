@@ -30,7 +30,7 @@ class QuizController extends Controller
             'option_d' => 'required',
             'correct_option' => 'required',
         ]);
-    
+
         Question::create([
             'question' => $request->question,
             'option_a' => $request->option_a,
@@ -39,17 +39,25 @@ class QuizController extends Controller
             'option_d' => $request->option_d,
             'correct_option' => $request->correct_option,
         ]);
-    
+
         return redirect()->route('quiz.index')->with('success', 'Question Added!');
     }
-    
+
 
     // 📝 Delete Question
+    // 📝 Delete Question (AJAX Support)
     public function destroy($id)
     {
-        Question::find($id)->delete();
-        return redirect()->route('quiz.index')->with('success', 'Question Deleted!');
+        $question = Question::find($id);
+
+        if ($question) {
+            $question->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Question not found'], 404);
+        }
     }
+
 
     // 📝 Evaluate Quiz
     public function evaluate(Request $request)
@@ -60,41 +68,42 @@ class QuizController extends Controller
         $results = [];
     
         foreach ($questions as $question) {
-            $userAnswerKey = $request->input('answer_' . $question->id);
+            $userAnswerRaw = request("answer_" . $question->id); // Jo answer user ne select kiya
+            $userAnswer = strtolower(trim($userAnswerRaw)); // Normalize user input
+            $correctAnswer = strtolower(trim($question->correct_option)); // ✅ Corrected column name
     
-            // ✅ Agar user ne koi answer diya hai tabhi check karein
-            if ($userAnswerKey) {
-                // ✅ Correct option ka **actual text** nikalein
-                $correctOptionKey = $question->correct_option; // e.g., "option_a"
-                $correctAnswer = $question->$correctOptionKey; // e.g., "Paris"
+            // Convert 'option_a', 'option_b', etc. to 'A', 'B', etc.
+            $answerMapping = [
+                'option_a' => 'A',
+                'option_b' => 'B',
+                'option_c' => 'C',
+                'option_d' => 'D',
+            ];
     
-                // ✅ Answer check karein (Direct value compare karein)
-                $isCorrect = ($userAnswerKey === $correctOptionKey);
+            // Agar user ka answer mapping wale format me hai to convert kare
+            if (isset($answerMapping[$userAnswer])) {
+                $userAnswer = $answerMapping[$userAnswer];
+            }
     
-                if ($isCorrect) {
-                    $score++;
-                }
+            // Check if the answer is correct
+            $isCorrect = $userAnswer === strtolower($correctAnswer);
     
-                $results[] = [
-                    'question' => $question->question,
-                    'user_answer' => $question->$userAnswerKey ?? 'Not Answered',
-                    'correct_answer' => $correctAnswer,
-                    'is_correct' => $isCorrect,
-                ];
-            } else {
-                $results[] = [
-                    'question' => $question->question,
-                    'user_answer' => 'Not Answered',
-                    'correct_answer' => $question->{$question->correct_option},
-                    'is_correct' => false,
-                ];
+            // Save result for display
+            $results[] = [
+                'question' => $question->question,
+                'correct_answer' => strtoupper($correctAnswer), // ✅ Capitalize correct answer
+                'user_answer' => strtoupper($userAnswerRaw), // ✅ Capitalize user answer
+                'is_correct' => $isCorrect, // True/False
+            ];
+    
+            // Agar answer sahi hai to score +1 kare
+            if ($isCorrect) {
+                $score++;
             }
         }
     
         return view('student-dashboard.result', compact('score', 'totalQuestions', 'results'));
     }
-    
-
     
     
     
