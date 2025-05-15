@@ -17,7 +17,7 @@ class StudentController extends Controller
     {
         return view('student-dashboard.create-notes');
     }
-    // Save Notes Function
+    // Save Notes stude
     public function saveNotes(Request $request)
     {
         $request->validate([

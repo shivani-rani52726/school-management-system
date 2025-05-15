@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->string('student_name'); // Student ka naam
+            $table->string('rollNo'); // Subject ka naam
             $table->date('date'); // Attendance ki date
-            $table->string('subject'); // Subject ka naam
             $table->enum('status', ['Present', 'Absent']); // Attendance status
             $table->timestamps();
         });

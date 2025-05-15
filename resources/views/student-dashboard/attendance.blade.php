@@ -15,7 +15,6 @@
                     <tr class="bg-blue-500 text-white text-left">
                         <th class="p-3">👤 Student</th>
                         <th class="p-3">📆 Date</th>
-                        <th class="p-3">📚 Subject</th>
                         <th class="p-3">✅ Status</th>
                     </tr>
                 </thead>
@@ -25,7 +24,6 @@
                             {{ $record->status == 'Present' ? 'bg-green-100' : 'bg-red-100' }}">
                             <td class="p-3">{{ $record->student_name }}</td>
                             <td class="p-3">{{ $record->date }}</td>
-                            <td class="p-3">{{ $record->subject }}</td>
                             <td class="p-3 font-bold">
                                 <span class="px-3 py-1 rounded 
                                     {{ $record->status == 'Present' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">

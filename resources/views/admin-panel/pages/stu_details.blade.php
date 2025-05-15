@@ -41,10 +41,11 @@
                         <tbody id="studentTableBody">
                             @if (isset($allStudentRecord))
                                 @foreach ($allStudentRecord as $studentRecord)
+                                {{-- @dd($studentRecord) --}}
                                     <tr>
                                         <td class="text-center py-2">{{ $studentRecord->stu_name }}</td>
                                         <td class="text-center py-2">{{ $studentRecord->rollNo }}</td>
-                                        <td class="text-center py-2">{{ $studentRecord->class }}</td>
+                                        <td class="text-center py-2">{{ $studentRecord->classStudent->class }}</td>
                                         <td class="text-center py-2">{{ $studentRecord->father_name }}</td>
                                         <td class="text-center py-2">{{ $studentRecord->mother_name }}</td>
                                         <td class="text-center py-2">{{ $studentRecord->aadhar_number }}</td>
@@ -71,7 +72,7 @@
                                                 onclick="openModal(this)"
                                                 data-student-name="{{ $studentRecord->stu_name }}"
                                                 data-student-rollNo="{{ $studentRecord->rollNo }}"
-                                                data-student-class="{{ $studentRecord->class }}"
+                                                data-student-class="{{ $studentRecord->classStudent->class }}"
                                                 data-student-fatherName="{{ $studentRecord->father_name }}"
                                                 data-student-motherName="{{ $studentRecord->mother_name }}"
                                                 data-student-adharNumber="{{ $studentRecord->aadhar_number }}"
@@ -131,9 +132,21 @@
                                     placeholder="Enter roll number" required>
                             </div>
                             <div>
-                                <label for="stuClass" class="block text-sm font-medium text-gray-700">Class</label>
+                                {{-- <label for="stuClass" class="block text-sm font-medium text-gray-700">Class</label>
                                 <input type="text" id="stuClass" name="stuClass" class="p-2 border rounded w-full"
-                                    placeholder="Enter class" required>
+                                    placeholder="Enter class" required> --}}
+                                    
+                                <label for="stuClass" class="block text-sm font-medium text-gray-700">Class</label> 
+                                {{-- {{ $className }} --}}
+                                    @if (isset($className))
+                                    <select name="stuClass"
+                                        class="w-full shadow-md rounded-md">
+                                        <option value="" disabled selected>Select a Class Name</option>
+                                        @foreach ($className as $classStudent)
+                                            <option value="{{ $classStudent->uuid }}">{{ $classStudent->class }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                             <div>
                                 <label for="fatherName" class="block text-sm font-medium text-gray-700">Father's

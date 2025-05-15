@@ -52,9 +52,9 @@
                     <li>
                         <a href="{{ route('studyMaterial.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Study Material</a>
                     </li>
-                    {{-- <li>
-                        <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Settings</a>
-                    </li> --}}
+                    <li>
+                        <a href="{{ route('add-attendence') }}" class="block py-2 px-4 hover:bg-gray-700 rounded">Add Attendence</a>
+                    </li>
                 </ul>
             </nav>
             <div class="p-4 border-t border-gray-700 text-center">

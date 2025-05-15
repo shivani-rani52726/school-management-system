@@ -9,6 +9,6 @@ class Attendance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_name', 'date', 'subject', 'status'];
+    protected $fillable = ['student_name', 'rollNo', 'date', 'status'];
 }
 

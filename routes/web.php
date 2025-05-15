@@ -1,23 +1,25 @@
 <?php
 
-use App\Http\Controllers\ClassStudentController;
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeeController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\UserRegisterConroller;
+use App\Http\Controllers\ClassStudentController;
+use App\Http\Controllers\TeachersNameController;
+use App\Http\Controllers\AddAttendenceController;
 use App\Http\Controllers\SchoolDetailsController;
 use App\Http\Controllers\StudentDetailController;
-use App\Http\Controllers\SubjectWithClassController;
-use App\Http\Controllers\TeacherDetailController;
-use App\Http\Controllers\TeachersNameController;
 use App\Http\Controllers\StudyMaterialController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\QuizController;
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\ResultController;
-use App\Http\Controllers\FeeController;
+use App\Http\Controllers\TeacherDetailController;
+use App\Http\Controllers\SubjectWithClassController;
 use App\Http\Controllers\StudentStudyMaterialController;
-use App\Http\Controllers\NoteController;
-use App\Http\Controllers\UserRegisterConroller;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -124,20 +126,32 @@ Route::put('admin/subjects/update',[SubjectWithClassController::class,'update'])
 // })->name('studyMaterials');
 
 
-
-
 Route::get('/study-materials', [StudyMaterialController::class, 'index'])->name('studyMaterial.index');
 Route::get('/study-materials/create', [StudyMaterialController::class, 'create'])->name('studyMaterial.create');
 Route::post('/study-materials', [StudyMaterialController::class, 'store'])->name('studyMaterial.store');
 Route::get('/study-materials/download/{id}', [StudyMaterialController::class, 'download'])->name('studyMaterial.download');
 Route::delete('/study-materials/{id}', [StudyMaterialController::class, 'destroy'])->name('studyMaterial.destroy');
 
-
-
-
-
-
 // study material route end
+// add-attendence page 
+
+// Route::get('admin/add-attendence',function(){
+//     return view('admin-panel.pages.add-attendence');
+// })->name('add-attendence');
+Route::get('admin/add-attendence', [AddAttendenceController::class, 'index'])->name('add-attendence');
+Route::get('/admin/get-students-by-class/{class_uuid}', [AddAttendenceController::class, 'getStudents']);
+Route::post('/admin/mark-attendance', [AddAttendenceController::class, 'storeAttendance']);
+
+// https://school-management-system.test/get-students-by-class?class_uuid=9e3ffd72-8735-472d-a9b8-8fbf9ada6a53
+
+// Route::post('admin/add-attendence', [AttendanceController::class, 'store'])->name('add-attendence.store');
+// Route::get('admin/add-attendence', [AttendanceController::class, 'create'])->name('add-attendence.create');
+// Route::get('admin/add-attendence', [AttendanceController::class, 'show'])->name('add-attendence.show');
+// Route::delete('admin/add-attendence/{uuid}', [AttendanceController::class, 'destroy'])->name('add-attendence.destroy');
+// Route::put('admin/add-attendence/update', [AttendanceController::class, 'update'])->name('add-attendence.update');
+// add-attendence page end
+
+
 
 // student dashboard route start
 

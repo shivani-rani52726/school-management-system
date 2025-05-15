@@ -62,45 +62,80 @@ class QuizController extends Controller
     // 📝 Evaluate Quiz
     public function evaluate(Request $request)
     {
+        // dd($request);
         $score = 0;
         $totalQuestions = Question::count();
         $questions = Question::all();
         $results = [];
+
+        $answerKeyMap = [
+            'option_a' => 'A',
+            'option_b' => 'B',
+            'option_c' => 'C',
+            'option_d' => 'D',
+        ];
     
         foreach ($questions as $question) {
-            $userAnswerRaw = request("answer_" . $question->id); // Jo answer user ne select kiya
-            $userAnswer = strtolower(trim($userAnswerRaw)); // Normalize user input
-            $correctAnswer = strtolower(trim($question->correct_option)); // ✅ Corrected column name
-    
+            // $userQuestionAnswerRaw = request("answer_" . $question->id); // Jo answer user ne select kiya
+            // $userAnswer = strtolower(trim($userQuestionAnswerRaw)); // Normalize user input
+            $userAnswerKey = request("answer_" . $question->id);
+            $userAnswerValue = strtolower(trim($question->{$userAnswerKey}));
+
+            $correctAnswerValue = strtolower(trim($question->correct_option)); // ✅ Corrected column name
+            $isCorrect = $userAnswerValue == $correctAnswerValue;
+            // dd($isCorrect);
             // Convert 'option_a', 'option_b', etc. to 'A', 'B', etc.
-            $answerMapping = [
-                'option_a' => 'A',
-                'option_b' => 'B',
-                'option_c' => 'C',
-                'option_d' => 'D',
-            ];
-    
-            // Agar user ka answer mapping wale format me hai to convert kare
-            if (isset($answerMapping[$userAnswer])) {
-                $userAnswer = $answerMapping[$userAnswer];
-            }
-    
-            // Check if the answer is correct
-            $isCorrect = $userAnswer === strtolower($correctAnswer);
-    
-            // Save result for display
-            $results[] = [
+         
+            // dd($answerMapping);
+
+
+
+            $correctAnswerKey = collect([
+                'option_a' => $question->option_a,
+                'option_b' => $question->option_b,
+                'option_c' => $question->option_c,
+                'option_d' => $question->option_d,
+            ])->search(function($value) use ($correctAnswerValue){
+                return strtolower(trim($value)) == $correctAnswerValue;
+            });
+
+            $userAnswerLabel = $answerKeyMap[$userAnswerKey] ?? 'N/A'; 
+            $correctAnswerLabel = $answerKeyMap[$correctAnswerKey] ?? 'N/A';
+            // dd($correctAnswerLabel);
+             $results[] = [
                 'question' => $question->question,
-                'correct_answer' => strtoupper($correctAnswer), // ✅ Capitalize correct answer
-                'user_answer' => strtoupper($userAnswerRaw), // ✅ Capitalize user answer
+                'correct_answer' => $correctAnswerLabel, // ✅ Capitalize correct answer
+                'user_answer' => $userAnswerLabel, // ✅ Capitalize user answer
                 'is_correct' => $isCorrect, // True/False
             ];
-    
-            // Agar answer sahi hai to score +1 kare
-            if ($isCorrect) {
+            
+            if($isCorrect){
                 $score++;
             }
+    
+            // Agar user ka answer mapping wale format me hai to convert kare
+            // if (isset($answerMapping[$userAnswer])) {
+            //     $userkeyAnswer = $answerMapping[$userAnswer];
+            // }
+            
+            // Check if the answer is correct
+            // $isCorrect = $userAnswer == strtolower($userkeyAnswer);
+    
+            // Save result for display
+            // $results[] = [
+            //     'question' => $question->question,
+            //     'correct_answer' => strtoupper($correctAnswer), // ✅ Capitalize correct answer
+            //     'user_answer' => strtoupper($userQuestionAnswerRaw), // ✅ Capitalize user answer
+            //     'is_correct' => $isCorrect, // True/False
+            // ];
+    
+            // Agar answer sahi hai to score +1 kare
+            // if ($isCorrect) {
+            //     $score++;
+            // }
         }
+
+
     
         return view('student-dashboard.result', compact('score', 'totalQuestions', 'results'));
     }

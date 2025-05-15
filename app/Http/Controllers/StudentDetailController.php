@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\classStudent;
 use App\Models\StudentDetail;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,11 @@ class StudentDetailController extends Controller
     }
 
     public function show() {
-        $allStudentRecord = StudentDetail::all();
+        $allStudentRecord = StudentDetail::with('classStudent')->orderBy('rollNo','asc')->get();
+        $className = classStudent::all();
+        // dd($className);
         // dd($allStudentRecord);
-        return view('admin-panel.pages.stu_details',compact('allStudentRecord'));
+        return view('admin-panel.pages.stu_details',compact('allStudentRecord','className'));
     }
 
     public function destroy($uuid) {
