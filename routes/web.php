@@ -132,6 +132,7 @@ Route::post('/study-materials', [StudyMaterialController::class, 'store'])->name
 Route::get('/study-materials/download/{id}', [StudyMaterialController::class, 'download'])->name('studyMaterial.download');
 Route::delete('/study-materials/{id}', [StudyMaterialController::class, 'destroy'])->name('studyMaterial.destroy');
 
+<<<<<<< Updated upstream
 // study material route end
 // add-attendence page 
 
@@ -152,6 +153,20 @@ Route::post('/admin/mark-attendance', [AddAttendenceController::class, 'storeAtt
 // add-attendence page end
 
 
+=======
+
+// study material route end
+// add attendence page route start
+
+Route::get('/admin/add-attendence',function(){
+    return view('admin-panel.pages.add-attendence');
+})->name('add-attendence');
+
+// add attendence page route end
+
+
+// admin-panel route end
+>>>>>>> Stashed changes
 
 // student dashboard route start
 
